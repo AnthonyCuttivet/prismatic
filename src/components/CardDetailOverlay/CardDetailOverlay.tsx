@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Card } from 'src/types/card';
+import { RichDescription } from 'src/components/RichDescription/RichDescription';
 import './CardDetailOverlay.css';
 
 interface CardDetailOverlayProps {
@@ -100,6 +101,17 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
     return colors[rarity.toLowerCase()] || '#667eea';
   };
 
+  const getTypeColor = (rarity: string): string => {
+    const colors: { [key: string]: string } = {
+      common: '#b8722d',
+      uncommon: '#bbbbbb',
+      rare: '#ffc954',
+      epic: '#ffc954',
+      showcase: '#ffc954',
+    };
+    return colors[rarity.toLowerCase()] || '#667eea';
+  };
+
   const getDomainColor = (domain: string): string => {
     const colors: { [key: string]: string } = {
       fury: '#ff000b',
@@ -128,6 +140,7 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
   const domain2Color = getDomainColor(card.domain.length == 2 ? card.domain[1] : card.domain[0]);
   const rarityColor = getRarityColor(card.rarity);
   const rarityRGB = getRarityRGB(card.rarity);
+  const typeColor = getTypeColor(card.rarity);
 
   return (
     <div className="card-detail-overlay" onClick={onClose}>
@@ -197,7 +210,8 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
             '--domain1-color': domain1Color,
             '--domain2-color': domain2Color,
             '--rarity-color': rarityColor,
-            '--rarity-rgb': rarityRGB
+            '--rarity-rgb': rarityRGB,
+            '--type-color': typeColor,
           } as React.CSSProperties}
         >
           <button
@@ -215,7 +229,12 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
               <img src={`/assets/icons/rarity_${card.rarity}.png`} alt="" className="card-detail-overlay__icon" />
               {card.rarity}
             </span>
-            <span className="card-detail-overlay__type">{card.type}</span>
+            <span className="card-detail-overlay__type">
+              <span className="card-detail-overlay__icon-color-wrapper">
+                <img src={`/assets/icons/type_${card.type}.png`} alt="" className="card-detail-overlay__icon-color" />
+              </span>
+              {card.type}
+            </span>
           </div>
 
           {(card.runeCost > 0 || card.might > 0) &&
@@ -224,8 +243,18 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
             <div className="card-detail-overlay__stat">
               <span className="card-detail-overlay__stat-label">Rune Cost</span>
               <span className="card-detail-overlay__stat-value card-detail-overlay__stat-value--circle">
-                {card.runeCost > 0 ? card.runeCost : "0"}
+                {card.runeCost}
               </span>
+              <div className="card-detail-overlay__rune-icons">
+                {Array.from({ length: card.powerCost }).map((_, index) => (
+                  <img
+                    key={index}
+                    src={card.domain.length == 1 ? `/assets/icons/rune_${card.domain[0]}.svg` : `/assets/icons/type_rune.png`}
+                    alt=""
+                    className="card-detail-overlay__rune-icon"
+                  />
+                ))}
+              </div>
             </div>
           }
 
@@ -234,7 +263,7 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
               <span className="card-detail-overlay__stat-label">Might</span>
               <span className="card-detail-overlay__stat-value">
                 <img src="/assets/icons/might.svg" alt="" className="card-detail-overlay__icon-inline" />
-                {card.might > 0 ? card.might : "-"}
+                {card.might}
               </span>
             </div>
 
@@ -244,7 +273,9 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
 
           <div className="card-detail-overlay__section">
             <h3 className="card-detail-overlay__section-title">Description</h3>
-            <p className="card-detail-overlay__description">{card.description.length > 0 ? card.description : "-"}</p>
+            <p className="card-detail-overlay__description">
+              <RichDescription description={card.description.length > 0 ? card.description : "-"}/>
+            </p>
           </div>
 
           {card.domain && card.domain.length > 0 && (

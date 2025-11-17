@@ -4,6 +4,7 @@ export interface Card {
     rarity: string;
     type: string;
     runeCost: number;
+    powerCost: number;
     might: number;
     description: string;
     imageUrl: string;
