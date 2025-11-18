@@ -18,9 +18,14 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
   const [forceShine, setForceShine] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
   const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastUpdateRef = useRef<number>(0);
 
   // Handle mouse move for 3D effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+
+    const now = Date.now();
+    if (now - lastUpdateRef.current < 16) return;
+    lastUpdateRef.current = now;
 
     if(leaveTimeoutRef.current)
     {
@@ -175,7 +180,7 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
           style={{
             transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
             transition: rotation.x === 0 && rotation.y === 0
-              ? 'transform 0.2s ease-out'
+              ? 'transform 0.5s ease-out'
               : 'transform 0.1s ease-out'
           }}
         >
@@ -297,19 +302,6 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
                     </span>
                 ))}
                 </div>
-            </div>
-          )}
-
-          {card.tags && card.tags.length > 0 && (
-            <div className="card-detail-overlay__section">
-              <h3 className="card-detail-overlay__section-title">Tags</h3>
-              <div className="card-detail-overlay__tags">
-                {card.tags.map(tag => (
-                  <span key={tag} className="card-detail-overlay__tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </div>
           )}
 

@@ -18,12 +18,21 @@ function CardGallery() {
         setLoading(true);
         const cardData = await fetchAllCards();
 
-        cardData.forEach( (card) => {
-          card.isFoil = (card.rarity != "common" && card.rarity != "uncommon");
+        // Auto-set foil for rare+ cards
+        const cardsWithFoil = cardData.map(card => ({
+          ...card,
+          isFoil: (['rare', 'epic', 'showcase'].includes(card.rarity.toLowerCase()) || (card.tags != null && card.tags.includes('PROMO')))
+        }));
+
+        setCards(cardsWithFoil);
+
+        // Preload all card images in background
+        cardsWithFoil.forEach(card => {
+          const img = new Image();
+          img.src = card.imageUrl;
         });
 
-        setCards(cardData);
-        console.log('Loaded', cardData.length, 'cards');
+        console.log('Loaded', cardsWithFoil.length, 'cards');
       } catch (err) {
         setError('Failed to load cards. Check console for details.');
         console.error(err);
