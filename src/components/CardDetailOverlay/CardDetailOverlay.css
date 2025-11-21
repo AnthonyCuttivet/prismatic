@@ -35,10 +35,8 @@
 }
 
 .card-detail-overlay__details {
-  min-height: 80vh;
-  max-height: 80vh;
+  min-height: 100%;
   background: #111111;
-  border-radius: 5px;
   border-top: 4px solid transparent;
   background-image:
     linear-gradient(#111111, #111111),
@@ -75,7 +73,7 @@
 }
 
 .card-detail-overlay__title {
-  margin: 0 0 30px 0;
+  margin: 0 0 10px 0;
   font-size: 40px;
   color: #fff;
   font-weight: 400;
@@ -86,7 +84,7 @@
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #222;
 }
@@ -117,7 +115,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   min-height: 65px;
 }
 
@@ -144,13 +142,14 @@
   font-size: 32px;
   font-weight: 600;
   color: #fff;
+  display: inline-flex;
 }
 
 .card-detail-overlay__stat-value--circle {
   background: rgba(255, 255, 255, 1.0);
   border-radius: 50%;
-  padding-left: 1px;
-  padding-bottom: 1px;
+  padding-left: 3px;
+  padding-bottom: 3px;
   font-size: 26px;
   width: 36px;
   height: 36px;
@@ -168,7 +167,7 @@
 }
 
 .card-detail-overlay__section {
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 }
 
 .card-detail-overlay__section-title {
@@ -208,8 +207,8 @@
 }
 
 .card-detail-overlay__footer {
-  margin-top: 40px;
-  padding-top: 30px;
+  margin-top: 20px;
+  padding-top: 15px;
   border-top: 1px solid #222;
   display: flex;
   flex-direction: column;
@@ -388,13 +387,13 @@
   width: 1.5em;
   height: 1.5em;
   margin-right: 0.4em;
-  display: inline-block;
+  display: inline-flex;
   vertical-align: middle;
   margin-top: -0.25em;
 }
 
 .card-detail-overlay__icon-color-wrapper {
-  display: inline-block;
+  display: inline-flex;
   position: relative;
   width: 1.5em;
   height: 1.5em;
@@ -420,10 +419,8 @@
 
 .card-detail-overlay__icon-inline {
   width: 1em;
-  height: 1em;
   margin-right: 0.2em;
   vertical-align: middle;
-  margin-top: -0.25em;
 }
 
 .card-detail-overlay__icon-black
@@ -434,8 +431,9 @@
 .card-detail-overlay__rune-icons {
   display: flex;
   gap: 4px;
-  margin-top: 8px;
+  margin-top: 3px;
   flex-wrap: wrap;
+  margin-left: 3px;
 }
 
 .card-detail-overlay__rune-icon {

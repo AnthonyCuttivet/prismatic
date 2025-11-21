@@ -1,15 +1,19 @@
 import React, { useState, useRef } from 'react';
-import { Card } from 'src/types/card';
+import { Card } from '@/types/card';
 import './CardItem.css';
 
 interface CardItemProps {
   card: Card;
   onClick: (card:Card) => void;
+  isImageLoaded?: boolean;
+  onImageLoaded?: () => void;
+
 }
 
-function CardItem({ card, onClick }: CardItemProps) {
+function CardItem({ card, onClick, onImageLoaded }: CardItemProps) {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -38,10 +42,23 @@ function CardItem({ card, onClick }: CardItemProps) {
     setIsHovered(false);
   };
 
+  const handleImageLoad = () => {
+    if(imageLoaded){return;}
+    setTimeout(() => {
+      setImageLoaded(true);
+      onImageLoaded?.();
+    }, 100);
+  };
+
+  // Reset when card changes
+  // React.useEffect(() => {
+  //   setImageLoaded(false);
+  // }, [card.id]);
+
   return (
-    <div
+      <div
       ref={cardRef}
-      className="card-item"
+      className={`card-item ${imageLoaded ? 'card-item--loaded' : ''}`}
       onClick={() => onClick(card)}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
@@ -50,29 +67,34 @@ function CardItem({ card, onClick }: CardItemProps) {
         transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovered ? 1.05 : 1})`,
       }}
     >
-      <img
-        src={card.imageUrl}
-        alt={card.name}
-        className="card-item__image"
-      />
-
-      {isHovered && card.isFoil &&
-        <div
-          className="card-item__shine"
-          style={{
-            background: `
-            radial-gradient(circle at ${50 + rotation.y * 2}% ${50 - rotation.x * 2}%,
-              rgba(255, 255, 255, 0.84) 0%,
-              rgba(255, 200, 255, 0.62) 30%,
-              rgba(166, 255, 255, 0.56) 45%,
-              rgba(255, 244, 147, 0.53) 60%,
-              transparent 90%)`,
-            opacity: isHovered ? 0.7 : 0
-          }}
-        />
-      }
-
-
+      <div className='card-flip-inner'>
+        <div className="card-item__back">
+          <img
+            src="/assets/card-back.png"
+            alt="Card back"
+            className="card-item__image"
+          />
+        </div>
+        <div className="card-item__front">
+          <img
+            onLoad={handleImageLoad}
+            src={card.imageUrl}
+            alt={card.name}
+            className="card-item__image"
+          />
+          {isHovered && card.isFoil && (
+            <div
+              className="card-item__shine"
+              style={{
+                background: `radial-gradient(circle at ${50 + rotation.y * 10}% ${50 - rotation.x * 10}%,
+                  rgba(255, 255, 255, 0.4) 0%,
+                  transparent 50%)`,
+                opacity: 0.6
+              }}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

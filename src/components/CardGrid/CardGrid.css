@@ -3,14 +3,22 @@
   }
 
   .card-grid__header {
-    font-size: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
     margin-bottom: 20px;
-    color: #222;
+  }
+
+  .card-grid__header-text {
+    font-size: 18px;
+    color: #999;
   }
 
   .card-grid__container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(var(--grid, 6), 1fr);
     gap: 20px;
   }
 

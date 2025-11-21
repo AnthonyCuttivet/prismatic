@@ -88,20 +88,20 @@ export const RichDescription: React.FC<{ description: string }> = ({ description
           // Check if it's a stat keyword (replace with icon)
             if(parseInt(word) >= 0){
                 if(NUMERICS.includes(words[wordIndex + 2])){
-                    return;
+                    return null;
                 }
 
-                if(words[wordIndex + 2] == 'RUNE_RAINBOW'){
-                    return;
+                if(words[wordIndex + 2] === 'RUNE_RAINBOW'){
+                  return null;
                 }
             }
 
-            if(word == 'AND')
+            if(word === 'AND')
             {
-                return;
+              return null;
             }
 
-            if(word == 'RUNE_RAINBOW')
+            if(word === 'RUNE_RAINBOW')
             {
                 return (iconBlock(partIndex,wordIndex,word, parseInt(words[wordIndex-2])));
             }

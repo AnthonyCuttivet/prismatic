@@ -1,13 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import CardGallery from 'src/components/CardGallery/CardGallery';
+
+import { ThemeProvider } from "@/components/theme-provider"
+
+import CardGallery from '@/components/CardGallery/CardGallery';
 
 function App() {
   return (
-    <div className="App">
-      <CardGallery/>
-    </div>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="App">
+        <CardGallery/>
+      </div>
+    </ThemeProvider>
   );
 }
 

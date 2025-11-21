@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card } from 'src/types/card';
-import { RichDescription } from 'src/components/RichDescription/RichDescription';
+import { Card } from '@/types/card';
+import { RichDescription } from '@/components/RichDescription/RichDescription';
 import './CardDetailOverlay.css';
 
 interface CardDetailOverlayProps {
@@ -142,7 +142,7 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
   };
 
   const domain1Color = getDomainColor(card.domain[0]);
-  const domain2Color = getDomainColor(card.domain.length == 2 ? card.domain[1] : card.domain[0]);
+  const domain2Color = getDomainColor(card.domain.length === 2 ? card.domain[1] : card.domain[0]);
   const rarityColor = getRarityColor(card.rarity);
   const rarityRGB = getRarityRGB(card.rarity);
   const typeColor = getTypeColor(card.rarity);
@@ -254,7 +254,7 @@ function CardDetailOverlay({ card, onClose, onNext, onPrevious, hasNext, hasPrev
                 {Array.from({ length: card.powerCost }).map((_, index) => (
                   <img
                     key={index}
-                    src={card.domain.length == 1 ? `/assets/icons/rune_${card.domain[0]}.svg` : `/assets/icons/type_rune.png`}
+                    src={card.domain.length === 1 ? `/assets/icons/rune_${card.domain[0]}.svg` : `/assets/icons/type_rune.png`}
                     alt=""
                     className="card-detail-overlay__rune-icon"
                   />
