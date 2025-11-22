@@ -17,6 +17,7 @@
   gap: 50px;
   max-width: 1200px;
   width: 100%;
+  height: 90vh;
   max-height: 90vh;
 }
 
@@ -24,18 +25,21 @@
   flex-shrink: 0;
   transform-style: preserve-3d;
   cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .card-detail-overlay__image {
-  min-height: 90vh;
-  max-height: 90vh;
+  height: 100%;
   width: auto;
+  max-width: 100%;
+  object-fit: contain;
   border-radius: 20px;
   pointer-events: none;
 }
 
 .card-detail-overlay__details {
-  min-height: 100%;
   background: #111111;
   border-top: 4px solid transparent;
   background-image:
@@ -47,6 +51,7 @@
   flex: 1;
   overflow-y: auto;
   position: relative;
+  height: 100%;
 }
 
 .card-detail-overlay__close {
@@ -148,8 +153,6 @@
 .card-detail-overlay__stat-value--circle {
   background: rgba(255, 255, 255, 1.0);
   border-radius: 50%;
-  padding-left: 3px;
-  padding-bottom: 3px;
   font-size: 26px;
   width: 36px;
   height: 36px;
@@ -433,7 +436,6 @@
   gap: 4px;
   margin-top: 3px;
   flex-wrap: wrap;
-  margin-left: 3px;
 }
 
 .card-detail-overlay__rune-icon {

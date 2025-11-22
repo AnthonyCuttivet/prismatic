@@ -29,7 +29,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     background-size: 200% 200%;
-    animation: prismatic-shift 30s ease-in-out infinite;
+    animation: prismatic-shift 15s ease-in-out infinite;
   }
 
   @keyframes prismatic-shift {
