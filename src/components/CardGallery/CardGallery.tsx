@@ -197,9 +197,9 @@ function CardGallery() {
   (selectedRarity !== 'all' ? 1 : 0) +
   (selectedSet !== 'all' ? 1 : 0) +
   (selectedType !== 'all' ? 1 : 0) +
-  (energyRange[1] < 12 ? 1 : 0) +
-  (mightRange[1] < 10 ? 1 : 0) +
-  (powerRange[1] < 4 ? 1 : 0) +
+  ((energyRange[0] > 0 || energyRange[1] < 12) ? 1 : 0) +
+  ((mightRange[0] > 0 || mightRange[1] < 10) ? 1 : 0) +
+  ((powerRange[0] > 0 || powerRange[1] < 4) ? 1 : 0) +
   (hidePromos ? 1 : 0) +
   (showOnlyPromos ? 1 : 0);
 

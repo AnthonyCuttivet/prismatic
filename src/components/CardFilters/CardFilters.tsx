@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+
 import { ChevronDown, ChevronUp, Search } from 'lucide-react';
 import './CardFilters.css';
 
