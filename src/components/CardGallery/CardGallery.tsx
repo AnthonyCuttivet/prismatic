@@ -4,11 +4,14 @@ import { Card } from '@/types/card';
 import CardGrid from '@/components/CardGrid/CardGrid';
 import CardDetailOverlay from '@/components/CardDetailOverlay/CardDetailOverlay';
 import CardFilters from '@/components/CardFilters/CardFilters';
+import Footer from '../Footer/Footer';
+import MobileWarning from '../MobileWarning/MobileWarning';
 
 import './CardGallery.css';
-import Footer from '../Footer/Footer';
 
 function CardGallery() {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
   const [cards, setCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -25,6 +28,17 @@ function CardGallery() {
   const [powerRange, setPowerRange] = useState<[number, number]>([0, 4]);
   const [hidePromos, sethidePromos] = useState(false);
   const [showOnlyPromos, setShowOnlyPromos] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const loadCards = async () => {
@@ -217,6 +231,10 @@ function CardGallery() {
         Error: {error}
       </div>
     );
+  }
+
+  if (isMobile) {
+    return <MobileWarning />;
   }
 
   return (

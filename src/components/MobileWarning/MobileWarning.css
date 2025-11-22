@@ -1,0 +1,32 @@
+.mobile-warning {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-image: radial-gradient( circle farthest-corner at -24.7% -47.3%,  rgba(6,130,165,1) 0%, rgba(34,48,86,1) 66.8%, rgba(15,23,42,1) 100.2% );
+  }
+
+  .mobile-warning__content {
+    text-align: center;
+    max-width: 400px;
+  }
+
+  .mobile-warning__title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .mobile-warning__message {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .mobile-warning__submessage {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+  }
